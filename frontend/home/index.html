@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>جسر التواصل</title>
+  <script>
+    // لو مفيش تسجيل دخول، ارجع لصفحة الدخول
+    try { if (!localStorage.getItem("token")) location.replace("/login.html"); } catch (e) {}
+  </script>
+  <script src="/shared/theme.js"></script>
+  <meta name="theme-color" content="#3BA5C6">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/home/home.css">
+</head>
+<body>
+  <!-- الحاوية الرئيسية للتطبيق -->
+  <main class="app">
+
+    <!-- 1. الهيدر العلوي -->
+    <header class="top-bar">
+      <div class="brand">
+        <img src="/images/logo-light.webp" alt="شعار جسر التواصل" class="brand-logo logo-light"><img src="/images/logo-dark.webp" alt="شعار جسر التواصل" class="brand-logo logo-dark">
+      </div>
+
+      <div class="nav-actions">
+        <button class="theme-btn logout-btn" id="logoutBtn" type="button" aria-label="تسجيل الخروج" title="تسجيل الخروج">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H5a2 2 0 00-2 2v12a2 2 0 002 2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+        </button>
+        <button class="theme-btn" id="t" aria-label="تبديل الوضع">🌙</button>
+      </div>
+    </header>
+
+    <!-- 2. سكشن الهيرو (الشخصية والنصوص) -->
+    <section class="hero-section">
+      <!-- النصوص الترحيبية -->
+      <div class="hero-text">
+        <div class="desktop-welcome-pill" aria-hidden="true">
+          مرحباً بك في جسر التواصل 🖐️
+        </div>
+        <div class="welcome-row">
+          <svg class="sun-rays" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <line x1="12" y1="2" x2="12" y2="5"></line>
+            <line x1="5" y1="7" x2="7.5" y2="9.5"></line>
+            <line x1="19" y1="7" x2="16.5" y2="9.5"></line>
+          </svg>
+          <span class="text-welcome">أهلاً بك في</span>
+          <span class="text-brand-big">جسر التواصل</span>
+        </div>
+        <p class="tagline" id="tagline" aria-label="جسر التواصل هو ليس مجرد وسيلة لترجمة الإشارات، وإنما محاولة لبناء جسر تواصل حقيقي بين شخصين قد تختلف وسيلة التعبير لديهما.">
+          <span class="tagline-ghost" aria-hidden="true">جسر التواصل هو ليس مجرد وسيلة لترجمة الإشارات، وإنما محاولة لبناء جسر تواصل حقيقي بين شخصين قد تختلف وسيلة التعبير لديهما. 💙</span>
+          <span class="tagline-typed" id="taglineTyped" aria-hidden="true"></span>
+        </p>
+      </div>
+
+      <!-- الشخصية الملوحة -->
+      <div class="hero-avatar">
+        <div class="avatar-blob" aria-hidden="true"></div>
+        <img
+          src="/images/hero.webp"
+          alt="شاب يلوّح بيده مرحبًا" class="hero-img">
+      </div>
+    </section>
+
+    <!-- حاوية جانب المحتوى -->
+    <div class="content-wrapper">
+
+      <h3 class="services-title">خدمات الموقع</h3>
+      <!-- أزرار الخدمات -->
+      <nav class="services" aria-label="خدمات الموقع">
+        <a class="service-btn" id="svc-chat" href="/chats.html" data-service="chat" role="button">
+          <div class="svc-icon svc-blue" aria-hidden="true">💬</div>
+          <div class="svc-text">
+            <span class="svc-title">الدردشة</span>
+            <span class="svc-desc">تواصل مباشر بالكتابة والإشارة</span>
+          </div>
+          <div class="card-arrow-btn arrow-blue svc-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </div>
+        </a>
+
+        <a class="service-btn" id="svc-dict" href="#" data-service="dictionary" role="button">
+          <div class="svc-icon svc-teal" aria-hidden="true">🤟</div>
+          <div class="svc-text">
+            <span class="svc-title">قاموس الإشارات</span>
+            <span class="svc-desc">تعلّم وابحث عن الإشارات</span>
+          </div>
+          <div class="card-arrow-btn arrow-teal svc-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </div>
+        </a>
+
+        <a class="service-btn" id="svc-bot" href="#" data-service="chatbot" role="button">
+          <div class="svc-icon svc-pink" aria-hidden="true">🤖</div>
+          <div class="svc-text">
+            <span class="svc-title">الشات بوت</span>
+            <span class="svc-desc">مساعد ذكي يجاوب على أسئلتك</span>
+          </div>
+          <div class="card-arrow-btn arrow-pink svc-arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </div>
+        </a>
+      </nav>
+
+    </div>
+
+    <!-- شريط معلومات سطح المكتب السفلي الجديد (يظهر فقط على وضع الكمبيوتر) -->
+    <footer class="desktop-bottom-strip" aria-label="شريط معلومات جسر التواصل">
+      <!-- الجانب الأيمن: الشعار والعبارة التوضيحية -->
+      <div class="strip-right">
+        <div class="strip-brand">
+          <img src="/images/logo-light.webp" alt="شعار جسر التواصل" class="strip-logo-full logo-light"><img src="/images/logo-dark.webp" alt="شعار جسر التواصل" class="strip-logo-full logo-dark">
+        </div>
+        <span class="strip-divider" aria-hidden="true">|</span>
+        <span class="strip-slogan">لأن التواصل حق للجميع ..</span>
+      </div>
+
+      <!-- المنتصف: مميزات المنصة الثلاث -->
+      <div class="strip-features">
+        <div class="strip-feat">
+          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>يدعم جميع الفئات</span>
+        </div>
+        <span class="strip-divider" aria-hidden="true">|</span>
+        <div class="strip-feat">
+          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>سهل وسريع</span>
+        </div>
+        <span class="strip-divider" aria-hidden="true">|</span>
+        <div class="strip-feat">
+          <svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>آمن وموثوق</span>
+        </div>
+      </div>
+
+      <!-- الجانب الأيسر: معاً لبناء جسر تواصل -->
+      <div class="strip-left">
+        <span class="strip-quote">معاً لبناء جسر تواصل</span>
+        <svg class="strip-heart" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+      </div>
+    </footer>
+
+    <!-- 3. الفوتر وشريط التنقل السفلي الخاص بالموبايل (يظهر فقط على الموبايل) -->
+    <footer class="bottom-wrapper">
+      <div class="quote-box">
+        <div class="quote-content">
+          <svg class="heart-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+          <div class="quote-lines">
+            <span>معاً</span>
+            <span>لبناء جسر</span>
+            <span>تواصل</span>
+          </div>
+        </div>
+        <svg class="quote-curved-line" viewBox="0 0 70 8" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round">
+          <path d="M2 6C22 2 48 1 68 5" />
+        </svg>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- زر الشات العائم -->
+  <button class="chatbot-toggler" id="chatToggler" aria-label="فتح المحادثة الذكية">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+  </button>
+
+  <!-- نافذة المحادثة المتصلة بـ n8n Webhook -->
+  <aside class="chatbot-box" id="chatBox" role="dialog" aria-modal="true" aria-label="نافذة المحادثة">
+    <header class="chat-header">
+      <div class="chat-header-title">
+        <span>🤖</span>
+        <span>مساعد جسر التواصل الذكي</span>
+      </div>
+      <button class="close-btn" id="closeChat" aria-label="إغلاق">&times;</button>
+    </header>
+    <div class="chat-messages" id="chatBody">
+      <div class="chat-msg msg-bot">
+        أهلاً بك في جسر التواصل! 👋 كيف يمكنني مساعدتك اليوم في تيسير التواصل؟
+      </div>
+    </div>
+    <form class="chat-footer" id="chatForm" onsubmit="event.preventDefault();">
+      <input type="text" class="chat-input" id="chatInput" placeholder="اكتب رسالتك هنا..." autocomplete="off">
+      <button type="button" class="chat-btn-action" id="micBtn" aria-label="تسجيل صوتي">🎙️</button>
+      <button type="submit" class="chat-btn-action" id="sendBtn" aria-label="إرسال">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </aside>
+
+  
+
+  <script src="/home/home.js"></script>
+  <script src="/shared/pwa.js" defer></script>
+</body>
+</html>

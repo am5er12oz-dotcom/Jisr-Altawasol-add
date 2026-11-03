@@ -1,0 +1,174 @@
+/* ===== جسر التواصل: ألوان وأساسيات صفحات الشات (نفس هوية الصفحة الرئيسية) ===== */
+:root {
+  --ink: #1F2A44;
+  --ink-soft: #6B7280;
+  --card: #FFFFFF;
+  --sky: #3BA5C6;          /* التركواز الأساسي */
+  --sky-deep: #168AAD;
+  --sky-soft: #DCEFF6;
+  --sun: #FFA63D;          /* البرتقالي */
+  --sun-soft: #FFF0DA;
+  --mint: #168AAD;
+  --mint-soft: #E4F3F8;
+  --pink: #F0627A;
+  --pink-soft: #FDE7EB;
+  --white: #FFFFFF;
+  --line: #C9DCE6;
+  --edge: #C9DCE6;
+  --field: #FFFFFF;
+  --accent: #168AAD;
+  --danger: #D6455D;
+  --theirs: #FFFFFF;
+  --mine-a: #45B1D2;
+  --mine-b: #1B8DB0;
+  --mine-edge: #12708D;
+  --bg-gradient: linear-gradient(175deg, #F0F7FB 0%, #E6F3F7 45%, #DCF1F3 100%);
+  --shadow: rgba(31, 42, 68, .10);
+}
+[data-theme="dark"] {
+  --ink: #F1F5F9;
+  --ink-soft: #94A3B8;
+  --card: #18253A;
+  --sky: #2F93B5;
+  --sky-deep: #5DC0E0;
+  --sky-soft: #1A344E;
+  --sun-soft: #3A2A13;
+  --mint: #5DC0E0;
+  --mint-soft: #16324A;
+  --pink: #F27A90;
+  --pink-soft: #42232C;
+  --line: #2B4260;
+  --edge: #22344D;
+  --field: #0F1B30;
+  --accent: #5DC0E0;
+  --danger: #FF8095;
+  --theirs: #1F3050;
+  --mine-a: #2A8CAE;
+  --mine-b: #1B6F90;
+  --mine-edge: #0F4A62;
+  --bg-gradient: linear-gradient(175deg, #0B1324 0%, #111E36 50%, #13243D 100%);
+  --shadow: rgba(0, 0, 0, .35);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+
+body {
+  font-family: "Tajawal", "Cairo", "Tahoma", Arial, sans-serif;
+  font-size: 17px;
+  background: url('/images/bg-mobile.webp') no-repeat center center / cover, var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .3s, color .3s;
+}
+[data-theme="dark"] body {
+  background: linear-gradient(175deg, rgba(11,19,36,.92) 0%, rgba(17,30,54,.94) 50%, rgba(19,36,61,.96) 100%),
+    url('/images/bg-mobile.webp') no-repeat center center / cover;
+  background-attachment: fixed;
+}
+@media (min-width: 980px) {
+  body { background: url('/images/bg-desktop.jpg') no-repeat left center / cover, var(--bg-gradient); background-attachment: fixed; }
+  [data-theme="dark"] body {
+    background: linear-gradient(175deg, rgba(11,19,36,.90) 0%, rgba(17,30,54,.92) 50%, rgba(19,36,61,.95) 100%),
+      url('/images/bg-desktop.jpg') no-repeat left center / cover;
+    background-attachment: fixed;
+  }
+}
+button { font-family: inherit; font-size: inherit; color: inherit; cursor: pointer; }
+input { font-family: inherit; }
+:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
+
+.app {
+  max-width: 820px;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+@media (min-width: 860px) {
+  .app { border-inline: 1.5px solid var(--line); background: rgba(255,255,255,.28); backdrop-filter: blur(6px); }
+  [data-theme="dark"] .app { background: rgba(11,19,36,.35); }
+}
+
+/* ===== الشريط العلوي (نفس شكل الصفحة الرئيسية: لوجو + أزرار دائرية) ===== */
+.hero {
+  position: relative;
+  flex-shrink: 0;
+  background: var(--card);
+  color: var(--ink);
+  border-bottom: 1.5px solid var(--line);
+  box-shadow: 0 5px 0 var(--edge), 0 14px 26px var(--shadow);
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 12px;
+  border-radius: 0 0 28px 28px;
+  margin-bottom: 6px;
+  z-index: 5;
+}
+.hero-row { position: relative; display: flex; align-items: center; gap: 10px; }
+
+.circle-btn {
+  width: 42px; height: 42px; flex-shrink: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  background: var(--card);
+  box-shadow: 0 3px 0 var(--edge);
+  color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; font-size: 20px; line-height: 1;
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+}
+.circle-btn:active { transform: translateY(3px); box-shadow: 0 0 0 var(--edge); }
+.circle-btn .i { width: 22px; height: 22px; }
+
+.i { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.i.fill { fill: currentColor; stroke: none; }
+
+/* اللوجو (نسختين: فاتح وداكن) */
+.brand-logo { height: 56px; width: auto; display: block; object-fit: contain; }
+.brand-logo.logo-dark { display: none; }
+[data-theme="dark"] .brand-logo.logo-light { display: none; }
+[data-theme="dark"] .brand-logo.logo-dark { display: block; }
+
+/* ===== الصورة الرمزية ===== */
+.avatar {
+  width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-weight: 800; font-size: 22px;
+  overflow: hidden; background: linear-gradient(135deg, var(--mine-a), var(--mine-b));
+  border: 2.5px solid var(--card); box-shadow: 0 0 0 1.5px var(--line), 0 4px 10px var(--shadow);
+}
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ===== أزرار ===== */
+.btn-s {
+  padding: 8px 18px; border-radius: 16px;
+  border: 0; border-bottom: 4px solid var(--mine-edge);
+  background: linear-gradient(135deg, var(--mine-a), var(--mine-b)); color: #fff;
+  font-weight: 800; font-size: 16px; white-space: nowrap;
+  transition: transform .1s;
+}
+.btn-s:active { transform: translateY(2px); border-bottom-width: 2px; }
+.btn-s.ghost { background: var(--card); color: var(--ink); border: 1.5px solid var(--line); border-bottom: 4px solid var(--edge); }
+.btn-s.ghost:active { border-bottom-width: 2px; }
+
+/* ===== الصورة الكبيرة ===== */
+.lightbox {
+  position: absolute; inset: 0; z-index: 50;
+  background: rgba(11, 19, 36, .92);
+  display: flex; align-items: center; justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox img { max-width: 96%; max-height: 92%; border-radius: 16px; border: 3px solid #fff; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+@keyframes blink { 50% { opacity: .2; } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

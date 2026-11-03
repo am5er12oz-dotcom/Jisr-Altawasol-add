@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>محادثة | جسر التواصل</title>
+<meta name="theme-color" content="#3BA5C6">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<script>
+  try { if (!localStorage.getItem("token")) location.replace("/login.html"); } catch (e) {}
+</script>
+<script src="/shared/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<link rel="stylesheet" href="/chat/chat-theme.css?v=4">
+<link rel="stylesheet" href="/chat/room.css?v=4">
+<link rel="stylesheet" href="/chat/deaf-chat.css?v=5">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="hand">
+      <rect x="16" y="30" width="35" height="26" rx="13"/><rect x="16" y="10" width="8" height="30" rx="4"/>
+      <rect x="25" y="6" width="8" height="34" rx="4"/><rect x="34" y="10" width="8" height="30" rx="4"/>
+      <rect x="43" y="16" width="8" height="24" rx="4"/><rect x="6" y="34" width="8" height="22" rx="4" transform="rotate(-30 10 45)"/>
+    </g>
+  </defs>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-5L16 4l4 4L9 19z"/></symbol>
+  <symbol id="i-sign" viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+  <symbol id="i-zplus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-zminus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path d="M4 12a8 8 0 108-8H8"/><path d="M11 1L8 4l3 3"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+
+<div class="app">
+
+  <header class="hero">
+    <div class="hero-row">
+      <a class="circle-btn" id="backBtn" href="/chats.html" aria-label="رجوع"><svg class="i"><use href="#i-back"/></svg></a>
+      <a class="header-main" id="headerMain" href="/contact.html" title="معلومات الاتصال">
+        <div id="headerAvatar"></div>
+        <div class="header-text">
+          <div class="header-name" id="headerName" dir="auto"></div>
+          <div class="header-sub">اضغط لعرض معلومات الاتصال</div>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== نص الشاشة اللي فوق: الأفاتار أو الكاميرا ===== -->
+  <section class="stage" id="stage">
+    <div class="avatar-box" id="avatarBox"></div>
+
+    <div class="cam-box" id="camBox" hidden>
+      <video id="camVideo" playsinline muted></video>
+      <canvas id="camOverlay"></canvas>
+      <div class="cam-status" id="camStatus">جارٍ تجهيز الكاميرا…</div>
+      <div class="cam-bar" id="camBar"><i id="camBarFill"></i></div>
+    </div>
+
+    <div class="stage-caption" id="stageCaption">اضغط/ي على أي رسالة ليشرحها الأفاتار 👇</div>
+
+    <div class="zoom-tools" id="zoomTools">
+      <button class="tool-btn" id="zoomIn" type="button" title="تكبير الأفاتار" aria-label="تكبير الأفاتار"><svg class="i"><use href="#i-zplus"/></svg></button>
+      <button class="tool-btn" id="zoomOut" type="button" title="تصغير الأفاتار" aria-label="تصغير الأفاتار"><svg class="i"><use href="#i-zminus"/></svg></button>
+    </div>
+
+    <div class="stage-tools" id="stageTools">
+      <button class="tool-btn" id="replayBtn" type="button" title="إعادة الإشارة" aria-label="إعادة الإشارة" disabled><svg class="i"><use href="#i-replay"/></svg></button>
+      <div class="speed" id="speed" role="group" aria-label="سرعة الأفاتار"></div>
+    </div>
+
+    <div class="word-strip" id="wordStrip" hidden></div>
+  </section>
+
+  <main class="messages" id="messages"></main>
+
+  <footer class="composer" id="composer">
+
+    <!-- الاختيار الأول: كتابة أو تسجيل إشارة -->
+    <div class="panel modes" id="pIdle">
+      <button class="mode-btn" id="modeType" type="button"><svg class="i"><use href="#i-pen"/></svg><span>كتابة</span></button>
+      <button class="mode-btn sign" id="modeSign" type="button"><span class="mode-ic"><svg class="i"><use href="#i-sign"/></svg></span><span>تسجيل إشارة</span></button>
+    </div>
+
+    <!-- الكتابة -->
+    <div class="panel" id="pType" hidden>
+      <div class="bar">
+        <button class="round-btn plain" id="typeClose" type="button" aria-label="رجوع"><svg class="i"><use href="#i-x"/></svg></button>
+        <input type="text" id="textInput" placeholder="اكتب رسالة" dir="auto" autocomplete="off">
+        <button class="round-btn send" id="sendBtn" type="button" aria-label="إرسال"><svg class="i"><use href="#i-send"/></svg></button>
+      </div>
+    </div>
+
+    <!-- التسجيل -->
+    <div class="panel" id="pRec" hidden>
+      <div class="bar recording">
+        <span class="rec-dot"></span>
+        <span class="rec-text" id="recText">جارٍ التسجيل…</span>
+        <button class="round-btn plain" id="recCancel" type="button" aria-label="إلغاء"><svg class="i"><use href="#i-x"/></svg></button>
+        <button class="round-btn mic" id="recStop" type="button" aria-label="إيقاف التسجيل"><svg class="i fill"><use href="#i-stop"/></svg></button>
+      </div>
+    </div>
+
+    <!-- مراجعة المعنى قبل الإرسال -->
+    <div class="panel review" id="pReview" hidden>
+      <div class="review-title">المعنى اللي فهمناه من إشارتك:</div>
+      <div class="chips" id="reviewChips"></div>
+      <input type="text" id="reviewText" dir="auto" autocomplete="off" aria-label="نص الرسالة">
+      <div class="review-hint" id="reviewHint">اضغط/ي على أي كلمة لتغييرها أو حذفها</div>
+      <div class="review-actions">
+        <button class="btn-s" id="reviewSend" type="button">إرسال ✓</button>
+        <button class="btn-s ghost" id="reviewRetry" type="button">إعادة 🔁</button>
+        <button class="btn-s ghost" id="reviewCancel" type="button">إلغاء</button>
+      </div>
+    </div>
+
+  </footer>
+</div>
+
+<script src="/chat/config.js"></script>
+<script src="/chat/session.js"></script>
+<script src="/chat/store.js?v=4"></script>
+<script src="/chat/sign/sign-config.js?v=5"></script>
+<script src="/chat/sign/sign-db.js?v=5"></script>
+<script src="/chat/sign/avatar.js?v=5"></script>
+<script src="/chat/sign/sign-recognizer.js?v=5"></script>
+<script src="/chat/deaf-chat.js?v=5"></script>
+</body>
+</html>

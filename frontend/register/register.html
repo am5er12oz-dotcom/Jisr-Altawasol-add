@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>إنشاء حساب | جسر التواصل</title>
+<meta name="theme-color" content="#3BA5C6">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<script src="/shared/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/shared/auth.css?v=2">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<link rel="stylesheet" href="/register/register.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="hand" viewBox="0 0 24 24"><path d="M23 5.5V20c0 2.2-1.8 4-4 4h-7.3c-1.08 0-2.1-.43-2.85-1.19L1 14.83s1.26-1.23 1.3-1.25c.22-.19.49-.29.79-.29.22 0 .42.06.6.16.04.01 4.31 2.46 4.31 2.46V4c0-.83.67-1.5 1.5-1.5S11 3.17 11 4v7h1V1.5c0-.83.67-1.5 1.5-1.5S15 .67 15 1.5V11h1V2.5c0-.83.67-1.5 1.5-1.5S19 1.67 19 2.5V11h1V5.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5z"/></symbol>
+<symbol id="moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></symbol>
+<symbol id="sun" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 0 0-1.41 0 .996.996 0 0 0 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 0 0 0-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 0 0 0-1.41.996.996 0 0 0-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/></symbol>
+
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-3.3 3.6-6 8-6s8 2.7 8 6"/></symbol>
+  <symbol id="i-male" viewBox="0 0 24 24"><circle cx="10" cy="14" r="5"/><path d="M14 10l6-6M15 4h5v5"/></symbol>
+  <symbol id="i-female" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></symbol>
+  <symbol id="i-sign" viewBox="0 0 24 24"><path d="M8 13V6.5a1.5 1.5 0 013 0V12M11 11V4.5a1.5 1.5 0 013 0V12M14 12V6a1.5 1.5 0 013 0v7M17 10.5a1.5 1.5 0 013 0V15c0 4-3 7-7 7h-1.5c-2 0-3.6-.8-4.9-2.3L4 16.5a1.6 1.6 0 012.4-2.1L8 16"/></symbol>
+  <symbol id="i-speak" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3M9 21h6"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="3"/><path d="M8 11V8a4 4 0 018 0v3"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="brand">
+      <img src="/images/logo-light.webp" alt="جسر التواصل" class="auth-logo logo-light"><img src="/images/logo-dark.webp" alt="جسر التواصل" class="auth-logo logo-dark">
+    </div>
+    <h1>انضم إلى جسر التواصل <span class="wave"></span></h1>
+    <p class="motto" id="motto" aria-live="polite"></p>
+  </div>
+</header>
+
+<main class="card">
+  <h2>أنشئ حسابك</h2>
+  <p class="sub">سجّل دخول من حلال 
+    حساب جوجل، ثم أكمل بياناتك</p>
+  <form id="form" novalidate>
+
+    <div class="field" id="f-google">
+      <span class="lbl">حساب جوجل<span class="req">*</span></span>
+      <div id="gbtn"></div>
+      <div class="gchip" id="gchip">
+        <img id="gpic" alt="">
+        <div class="gtxt"><b id="gname"></b><small id="gmail"></small></div>
+        <button type="button" class="gchange" id="gchange">تغيير</button>
+      </div>
+      <div class="err-txt">يرجى التسجيل بحساب جوجل أولاً.</div>
+    </div>
+
+    <div class="field" id="f-name">
+      <label class="lbl" for="name">اسم المستخدم<span class="req">*</span></label>
+      <div class="input"><svg class="ios"><use href="#i-user"/></svg>
+        <input id="name" type="text" autocomplete="name" placeholder="الاسم" required>
+      </div>
+      <div class="err-txt">يرجى كتابة اسم المستخدم.</div>
+    </div>
+
+    <div class="field" id="f-gender">
+      <span class="lbl">الجنس<span class="req">*</span></span>
+      <div class="input dd" id="ddGender">
+        <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false">
+          <svg class="ios" id="gIc"><use href="#i-user"/></svg>
+          <span class="val ph">اختر/ي</span>
+          <svg class="ios chev"><use href="#i-chev"/></svg>
+        </button>
+        <div class="dd-list" role="listbox">
+          <div class="dd-item" role="option" data-v="male" data-ic="i-male" data-label="ذكر"><svg class="ios"><use href="#i-male"/></svg>ذكر</div>
+          <div class="dd-item" role="option" data-v="female" data-ic="i-female" data-label="أنثى"><svg class="ios"><use href="#i-female"/></svg>أنثى</div>
+        </div>
+      </div>
+      <div class="err-txt">يرجى اختيار الجنس: ذكر أو أنثى.</div>
+    </div>
+
+    <div class="field" id="f-type">
+      <span class="lbl">نوع المستخدم<span class="req">*</span></span>
+      <div class="input dd" id="ddType">
+        <button type="button" class="dd-btn" aria-haspopup="listbox" aria-expanded="false">
+          <svg class="ios" id="tIc"><use href="#i-sign"/></svg>
+          <span class="val ph">اختر/ي</span>
+          <svg class="ios chev"><use href="#i-chev"/></svg>
+        </button>
+        <div class="dd-list" role="listbox">
+          <div class="dd-item" role="option" data-v="deaf" data-ic="i-sign" data-label="أصم/صمّاء"><svg class="ios"><use href="#i-sign"/></svg>أصم/صمّاء (يتواصل/ تتواصل بالإشارة)</div>
+          <div class="dd-item" role="option" data-v="hearing" data-ic="i-speak" data-label="ناطق/ناطقة"><svg class="ios"><use href="#i-speak"/></svg>ناطق/ناطقة</div>
+        </div>
+      </div>
+      <div class="hint warn">يرجى الاختيار بدقة</div>
+      <div class="err-txt">يرجى اختيار نوع المستخدم: أصم أو ناطق.</div>
+    </div>
+
+    <div class="field" id="f-pw">
+      <label class="lbl" for="password">كلمة المرور (6 أحرف على الأقل)<span class="req">*</span></label>
+      <div class="input"><svg class="ios"><use href="#i-lock"/></svg>
+        <input id="password" type="password" autocomplete="new-password" placeholder="••••••" dir="ltr" minlength="6" required>
+        <button type="button" class="toggle" id="toggle" aria-label="إظهار كلمة المرور"><svg class="ios"><use href="#i-eye"/></svg></button>
+      </div>
+      <div class="err-txt">يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.</div>
+    </div>
+
+    <div class="field" id="f-pw2">
+      <label class="lbl" for="password2">تأكيد كلمة المرور<span class="req">*</span></label>
+      <div class="input"><svg class="ios"><use href="#i-lock"/></svg>
+        <input id="password2" type="password" autocomplete="new-password" placeholder="أعدى كتابة كلمة المرور" dir="ltr" required>
+      </div>
+      <div class="err-txt">كلمتا المرور غير متطابقتين.</div>
+    </div>
+
+    <button class="btn" id="btn" type="submit">إنشاء الحساب</button>
+    <p class="msg" id="msg" role="alert"></p>
+  </form>
+  <p class="switch">هل لديك حساب؟ <a href="/login.html">تسجيل الدخول</a></p>
+</main>
+
+
+<script src="/register/register.js"></script>
+<script src="/shared/pwa.js" defer></script>
+</body>
+</html>

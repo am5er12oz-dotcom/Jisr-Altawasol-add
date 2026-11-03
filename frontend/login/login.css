@@ -1,0 +1,12 @@
+  .lbl{font-size:18px !important}
+  .input input{font-size:18px !important}
+  .btn{font-size:20px !important}
+  .sub,.switch{font-size:16px !important}
+  .ios{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;color:var(--accent)}
+  #gbtn{display:flex;justify-content:center;margin:10px 0 8px;overflow:hidden;max-width:100%}
+  .or{display:flex;align-items:center;gap:12px;margin:14px 0;opacity:.7;font-size:15px}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:rgba(127,127,127,.4)}
+  .err-txt{display:none;color:#e11d48;font-size:15px;margin-top:6px;font-weight:600}
+  .field.invalid .input{border-color:#e11d48 !important}
+  .field.invalid .err-txt{display:block}
+  .req{color:#e11d48;margin-inline-start:4px}

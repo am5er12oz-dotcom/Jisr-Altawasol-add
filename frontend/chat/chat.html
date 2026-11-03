@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>محادثة | جسر التواصل</title>
+<meta name="theme-color" content="#3BA5C6">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="/icons/icon-192.png">
+<script>
+  // لو مش مسجّل دخول، ارجع لصفحة الدخول (قبل ما الصفحة تظهر)
+  try { if (!localStorage.getItem("token")) location.replace("/login.html"); } catch (e) {}
+  // الأصم يتحوّل لصفحته (أفاتار + تسجيل إشارة)
+  try { var u = JSON.parse(localStorage.getItem("user")); if (u && u.userType === "deaf") location.replace("/deaf-chat.html" + location.search); } catch (e) {}
+</script>
+<script src="/shared/theme.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/chat/chat-theme.css?v=4">
+<link rel="stylesheet" href="/chat/room.css?v=4">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="hand">
+      <rect x="16" y="30" width="35" height="26" rx="13"/><rect x="16" y="10" width="8" height="30" rx="4"/>
+      <rect x="25" y="6" width="8" height="34" rx="4"/><rect x="34" y="10" width="8" height="30" rx="4"/>
+      <rect x="43" y="16" width="8" height="24" rx="4"/><rect x="6" y="34" width="8" height="22" rx="4" transform="rotate(-30 10 45)"/>
+    </g>
+  </defs>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0014 0"/><path d="M12 18v4"/></symbol>
+  <symbol id="i-clip" viewBox="0 0 24 24"><path d="M21 11l-8.5 8.5a5 5 0 01-7-7L14 4a3.3 3.3 0 014.7 4.7L10 17.4a1.7 1.7 0 01-2.4-2.4L15 7.6"/></symbol>
+  <symbol id="i-img" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V4h6v3"/><path d="M6 7l1 13h10l1-13"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-5L16 4l4 4L9 19z"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><path d="M3 8a2 2 0 012-2h2l2-2h6l2 2h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><circle cx="12" cy="13" r="3.5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 3h14a3 3 0 013 3v9a3 3 0 01-3 3h-8l-5 4v-4H5a3 3 0 01-3-3V6a3 3 0 013-3z"/></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></symbol>
+</svg>
+<div class="app">
+
+  <header class="hero">
+    <div class="hero-row">
+      <a class="circle-btn" id="backBtn" href="/chats.html" aria-label="رجوع"><svg class="i"><use href="#i-back"/></svg></a>
+      <a class="header-main" id="headerMain" href="/contact.html" title="معلومات الاتصال">
+        <div id="headerAvatar"></div>
+        <div class="header-text">
+          <div class="header-name" id="headerName" dir="auto"></div>
+          <div class="header-sub">اضغط لعرض معلومات الاتصال</div>
+        </div>
+      </a>
+    </div>
+  </header>
+
+  <main class="messages" id="messages"></main>
+
+  <footer class="composer" id="composer">
+    <div class="bar" id="normalBar">
+      <button class="round-btn plain" id="attachBtn" type="button" title="إرسال صورة" aria-label="إرسال صورة"><svg class="i"><use href="#i-clip"/></svg></button>
+      <input type="file" id="imageInput" accept="image/*" hidden>
+      <input type="text" id="textInput" placeholder="اكتب رسالة" dir="auto" autocomplete="off">
+      <button class="round-btn send" id="sendBtn" type="button" title="إرسال" aria-label="إرسال" hidden><svg class="i"><use href="#i-send"/></svg></button>
+      <button class="round-btn mic" id="micBtn" type="button" title="تحدّث/ي ليُكتب كلامك" aria-label="تحويل الكلام إلى نص"><svg class="i"><use href="#i-mic"/></svg></button>
+    </div>
+
+  </footer>
+
+  <div class="lightbox" id="lightbox" hidden><img id="lightboxImg" alt=""></div>
+</div>
+
+<script src="/chat/config.js"></script>
+<script src="/chat/session.js"></script>
+<script src="/chat/store.js?v=4"></script>
+<script src="/chat/media.js"></script>
+<script src="/chat/chat.js?v=4"></script>
+</body>
+</html>

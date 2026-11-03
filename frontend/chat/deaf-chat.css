@@ -1,0 +1,131 @@
+/* ===== صفحة الأصم: أفاتار فوق + رسايل تحت ===== */
+.hero { padding-bottom: 10px; }
+
+/* ----- المسرح (الأفاتار / الكاميرا) ----- */
+.stage {
+  position: relative; flex: 0 0 44%; min-height: 250px; max-height: 52vh;
+  margin: 0 12px 6px;
+  background: linear-gradient(180deg, var(--sky-soft), var(--card));
+  border: 1.5px solid var(--line); border-radius: 26px;
+  box-shadow: 0 5px 0 var(--edge), 0 12px 24px var(--shadow);
+  overflow: hidden;
+}
+/* الأفاتار بينزل تحت شريط الكلام عشان الكلمة متبقاش على وشه */
+.avatar-box { position: absolute; inset: 44px 0 0 0; }
+.cam-box { position: absolute; inset: 0; }
+.avatar-canvas { width: 100%; height: 100%; display: block; }
+
+.cam-box { background: #000; }
+.cam-box video, .cam-box canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+.cam-status {
+  position: absolute; top: 10px; inset-inline: 10px; text-align: center; z-index: 2;
+  background: rgba(31, 42, 68, .85); color: #fff; font-weight: 800; font-size: 15px;
+  padding: 6px 12px; border-radius: 999px;
+}
+.cam-status.signing { background: rgba(214, 69, 93, .92); }
+.cam-bar { position: absolute; bottom: 0; inset-inline: 0; height: 6px; background: rgba(255,255,255,.25); z-index: 2; }
+.cam-bar i { display: block; height: 100%; width: 0; background: var(--sun); }
+
+/* الكلمة الإرشادية: شريط ثابت أعلى المسرح فوق الأفاتار */
+.stage-caption {
+  position: absolute; top: 8px; inset-inline: 12px; height: 28px; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-weight: 800; font-size: 13.5px; color: var(--ink);
+  background: var(--card); border: 1.5px solid var(--line); border-radius: 999px; padding: 0 12px;
+  box-shadow: 0 2px 0 var(--edge);
+}
+.stage-caption[hidden] { display: none; }
+.stage.recording .stage-caption, .stage.recording .stage-tools, .stage.recording .word-strip { display: none; }
+
+.stage-tools {
+  position: absolute; bottom: 10px; inset-inline: 10px; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px; direction: rtl;
+}
+.tool-btn {
+  width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--line); background: var(--card);
+  box-shadow: 0 3px 0 var(--edge);
+  display: flex; align-items: center; justify-content: center; color: var(--accent);
+}
+.tool-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--edge); }
+.tool-btn .i { width: 20px; height: 20px; stroke-width: 2.6; display: block; }
+.tool-btn:disabled { opacity: .4; }
+.speed { display: flex; gap: 6px; }
+.speed button {
+  padding: 3px 11px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--card);
+  box-shadow: 0 3px 0 var(--edge);
+  font-weight: 800; font-size: 14px; color: var(--ink);
+}
+.speed button[aria-pressed="true"] { background: linear-gradient(135deg, var(--mine-a), var(--mine-b)); border-color: transparent; color: #fff; box-shadow: 0 3px 0 var(--mine-edge); }
+
+.word-strip {
+  position: absolute; bottom: 58px; inset-inline: 10px; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-height: 64px; overflow: hidden;
+}
+.word-chip {
+  padding: 2px 10px; border-radius: 999px; font-weight: 800; font-size: 14px;
+  background: var(--card); border: 1.5px solid var(--line); color: var(--ink);
+}
+.word-chip.active { background: var(--sun); border-color: var(--sun); color: #fff; }
+.word-chip.unknown { border-style: dashed; opacity: .65; }
+
+/* ----- الرسايل ----- */
+.msg { cursor: pointer; }
+.msg.mine { cursor: default; }
+.msg.theirs.unsigned { background: var(--sun-soft); border-color: var(--sun); box-shadow: 0 4px 0 var(--sun); }
+.msg.theirs.signed { opacity: .82; }
+.msg.theirs.playing { outline: 3px solid var(--sky); outline-offset: 2px; opacity: 1; }
+.msg .state { display: block; font-size: 12px; font-weight: 800; color: var(--ink-soft); }
+.msg.theirs.unsigned .state { color: #C46A00; }
+[data-theme="dark"] .msg.theirs.unsigned .state { color: var(--sun); }
+.msg img.photo { cursor: default; }
+
+/* ----- شريط الاختيار ----- */
+.panel.modes { display: flex; gap: 12px; }
+.mode-btn {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 10px; border-radius: 20px; font-weight: 900; font-size: 18px;
+  border: 1.5px solid var(--line); border-bottom: 5px solid var(--edge); background: var(--card); color: var(--ink);
+  transition: transform .1s;
+}
+.mode-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+.mode-btn.sign { background: linear-gradient(135deg, var(--mine-a), var(--mine-b)); border-color: transparent; border-bottom-color: var(--mine-edge); color: #fff; }
+.mode-btn .i { width: 26px; height: 26px; }
+.mode-ic { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: rgba(255,255,255,.22); flex-shrink: 0; }
+.mode-btn:not(.sign) .mode-ic { background: var(--sky-soft); }
+.mode-btn .i.fill { fill: currentColor; stroke: none; }
+.round-btn .i.fill { fill: currentColor; stroke: none; }
+
+.rec-text { flex: 1; font-weight: 800; font-size: 16px; }
+
+/* ----- مراجعة المعنى ----- */
+.panel.review { display: flex; flex-direction: column; gap: 10px; }
+.review-title { font-weight: 900; font-size: 16px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.rchip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 14px;
+  border: 1.5px solid var(--line); box-shadow: 0 3px 0 var(--edge); background: var(--card); color: var(--ink); font-weight: 800; font-size: 16px;
+}
+.rchip.sure { background: var(--mint-soft); border-color: var(--sky); }
+.rchip.approx { background: var(--sun-soft); border-color: var(--sun); }
+.rchip.unknown { background: var(--pink-soft); border-color: var(--pink); }
+.rchip.removed { opacity: .5; text-decoration: line-through; border-style: dashed; }
+.rchip small { font-size: 12px; opacity: .8; }
+#reviewText {
+  padding: 11px 16px; border: 1.5px solid var(--line); border-radius: 16px; box-shadow: 0 3px 0 var(--edge);
+  background: var(--field); color: var(--ink); font-size: 17px; outline: none;
+}
+#reviewText:focus { border-color: var(--sky); }
+.review-hint { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+.review-actions { display: flex; gap: 8px; }
+.review-actions .btn-s { flex: 1; padding-inline: 8px; }
+
+/* ----- تكبير/تصغير الأفاتار ----- */
+.zoom-tools { position: absolute; top: 52px; inset-inline-start: 10px; z-index: 3; display: flex; flex-direction: column; gap: 8px; }
+.zoom-tools .tool-btn { width: 38px; height: 38px; padding: 0; }
+.zoom-tools .tool-btn .i { width: 18px; height: 18px; }
+.stage.recording .zoom-tools { display: none; }
+.avatar-msg {
+  position: absolute; bottom: 62px; inset-inline: 12px; text-align: center; z-index: 2;
+  font-size: 13px; font-weight: 800; color: var(--ink-soft);
+}

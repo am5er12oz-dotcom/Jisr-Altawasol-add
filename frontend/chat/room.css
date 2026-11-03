@@ -1,0 +1,96 @@
+/* ===== شاشة المحادثة ===== */
+.hero { padding-bottom: 12px; }
+.hero .avatar { width: 46px; height: 46px; font-size: 20px; }
+.header-main { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; color: inherit; text-decoration: none; }
+.header-text { min-width: 0; }
+.header-name { font-size: 21px; font-weight: 900; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink); }
+.header-sub { font-size: 12.5px; color: var(--ink-soft); font-weight: 700; }
+
+.messages {
+  flex: 1; overflow-y: auto; padding: 16px 14px 14px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.day-sep {
+  align-self: center; background: var(--card); color: var(--ink-soft); border: 1.5px solid var(--line);
+  font-size: 13px; font-weight: 800; padding: 2px 14px; border-radius: 999px; margin: 6px 0;
+}
+
+.msg {
+  max-width: 78%; padding: 8px 14px 6px; border-radius: 22px;
+  font-size: 17px; line-height: 1.6; word-wrap: break-word; overflow-wrap: anywhere;
+  animation: rise .3s cubic-bezier(.2, .8, .2, 1) backwards;
+}
+/* رسايلي: تركواز متدرّج — رسايل الشخص التاني: كارت أبيض بحافة ناعمة */
+.msg.mine {
+  margin-left: auto; margin-right: 0;
+  background: linear-gradient(135deg, var(--mine-a), var(--mine-b)); color: #fff;
+  border-top-right-radius: 6px; box-shadow: 0 4px 0 var(--mine-edge);
+}
+.msg.theirs {
+  margin-right: auto; margin-left: 0;
+  background: var(--theirs); color: var(--ink);
+  border: 1.5px solid var(--line); border-top-left-radius: 6px; box-shadow: 0 4px 0 var(--edge);
+}
+
+.msg .time { display: block; font-size: 12px; font-weight: 700; text-align: end; margin-top: 1px; }
+.msg.mine .time { color: rgba(255, 255, 255, .8); }
+.msg.theirs .time { color: var(--ink-soft); }
+.msg .tick { margin-inline-start: 4px; font-weight: 900; letter-spacing: -2px; }
+.msg.mine .tick { color: rgba(255, 255, 255, .65); }
+.msg.mine .tick.read { color: #FFD08A; }
+
+.msg a.link { text-decoration: underline; font-weight: 700; }
+.msg.mine a.link { color: #FFF1C9; }
+.msg.theirs a.link { color: var(--accent); }
+
+.msg img.photo { display: block; max-width: 100%; max-height: 280px; border-radius: 14px; margin: 2px 0 4px; cursor: zoom-in; }
+
+.voice { display: flex; align-items: center; gap: 8px; min-width: 200px; }
+.voice audio { height: 38px; max-width: 200px; }
+.voice .dur { font-size: 13px; font-weight: 700; opacity: .85; }
+
+/* شريط الكتابة */
+.composer {
+  flex-shrink: 0; background: var(--card);
+  border-top: 1.5px solid var(--line); border-radius: 26px 26px 0 0;
+  box-shadow: 0 -8px 22px var(--shadow);
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+}
+.bar { display: flex; align-items: center; gap: 10px; }
+
+#textInput {
+  flex: 1; min-width: 0; padding: 11px 18px;
+  border: 1.5px solid var(--line); border-radius: 999px;
+  background: var(--field); color: var(--ink); font-size: 17px; outline: none;
+  box-shadow: 0 3px 0 var(--edge);
+  transition: border-color .2s, box-shadow .2s;
+}
+#textInput:focus { border-color: var(--sky); box-shadow: 0 3px 0 var(--edge), 0 0 0 4px rgba(59, 165, 198, .22); }
+#textInput::placeholder { color: var(--ink-soft); opacity: .75; }
+
+.round-btn {
+  width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-bottom: 5px solid transparent; color: #fff;
+  transition: transform .1s;
+}
+.round-btn .i { width: 24px; height: 24px; }
+.round-btn:active { transform: translateY(3px); border-bottom-width: 2px; }
+.round-btn.send { background: linear-gradient(135deg, var(--mine-a), var(--mine-b)); border-bottom-color: var(--mine-edge); }
+.round-btn.mic { background: linear-gradient(135deg, #FFB75E, #FF9A2E); border-bottom-color: #D97A12; }
+.round-btn.plain { background: transparent; border-color: transparent; border-bottom-width: 3px; color: var(--accent); }
+.round-btn.plain:hover { background: var(--sky-soft); }
+#sendBtn .i { transform: scaleX(-1); }
+
+.recording { justify-content: space-between; }
+.rec-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--danger); animation: blink 1s infinite; }
+.rec-timer { flex: 1; font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+/* الميكروفون وهو بيسمع */
+.round-btn.mic.listening { background: var(--danger); border-bottom-color: #9c2338; color: #fff; animation: blink 1s infinite; }
+
+/* صورة اتمسحت من السيرفر */
+.photo-expired { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 14px 18px; min-width: 190px; font-weight: 700; }
+.photo-expired .hint { font-size: 14px; opacity: .8; }
+.reup-btn { padding: 6px 14px; border-radius: 12px; border: 2px solid currentColor; background: transparent; font-weight: 800; font-size: 15px; }
